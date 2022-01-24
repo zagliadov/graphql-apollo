@@ -1,64 +1,51 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql, ApolloError, ValidationError } from "apollo-server";
+import axios from "axios";
+const URI = `https://jsonplaceholder.typicode.com/users`;
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-const authors = [
-  {
-    name: 'Kate Chopin',
-    books: {
-      title: 'The Awakening',
-      author: 'Kate Chopin',
-    }
-  },
-  {
-    name: 'Paul Auster',
-    books: {
-      title: 'City of Glass',
-      author: 'Paul Auster',
-    }
-  }
-]
+interface IUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
 
 const resolvers = {
   Query: {
-    books: () => books,
-    authors: () => authors,
+    async getAllUsers() {
+      return await axios.get(URI)
+        .then((response) => response.data)
+        .then((data) => data);
+    },
+    async getUser(id: string) {
+      return await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then(response => response.data)
+        .then(data => data);
+    }
   },
-
+  Mutation: {
+    async createUser(parent: any, args: any) {
+      const newUser = args;
+      await axios.post(URI, newUser);
+      return newUser;
+    }
+  }
 };
 
 const typeDefs = gql`
-
-  type Book {
-    title: String
-    author: Author
+  type User {
+    id: ID!
+    name: String!
+    username: String!
+    email: String!
   }
-
-  type Author {
-    name: String
-    books: [Book]
-  }
-
   type Query {
-    books: [Book]
-    authors: [Author]
+    getAllUsers: [User!]!
+    getUser(id: ID!): User!
   }
-
   type Mutation {
-  addBook(title: String, author: String): Book
-}
+    createUser(name: String!, username: String! email: String!): User!
+  }
 `;
-
-
-
 
 const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }) => {
