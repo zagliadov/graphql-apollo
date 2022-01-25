@@ -29,6 +29,5 @@ export const resolvers = {
       await axios.post(URI, newUser);
       return newUser;
     },
-
   },
 };
