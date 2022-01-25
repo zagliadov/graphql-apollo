@@ -16,9 +16,9 @@ export const resolvers = {
         .then((response) => response.data)
         .then((data) => data);
     },
-    async getUser(id: string) {
+    async getUser(par: any, args: any) {
       return await axios
-        .get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .get(`https://jsonplaceholder.typicode.com/users/${args.id}`)
         .then((response) => response.data)
         .then((data) => data);
     },
