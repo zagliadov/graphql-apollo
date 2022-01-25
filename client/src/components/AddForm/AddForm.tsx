@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { useCreateUser } from "../../hooks/useCreateUser";
 
 interface IProps {
   setOpen: (arg0: boolean) => void;
@@ -9,12 +10,16 @@ export const AddForm: FC<IProps> = ({ setOpen }) => {
     [username, setUsername] = useState<string>(""),
     [email, setEmail] = useState<string>("");
 
+  const [newUser, setNewUser] = useState<any>("");
+
+  // const { data } = useCreateUser(newUser);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setOpen(false);
-    console.log(name, username, email);
+    setNewUser({ name, username, email });
   };
-  useEffect(() => {}, [name, username, email]);
+
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}

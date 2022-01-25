@@ -1,6 +1,7 @@
 import axios from "axios";
 const URI = `https://jsonplaceholder.typicode.com/users/`;
 
+
 interface IUser {
   id: number;
   name: string;
@@ -19,6 +20,12 @@ export const resolvers = {
     async getUser(parent: any, args: any) {
       return await axios
         .get(`${URI}${args.id}`)
+        .then((response) => response.data)
+        .then((data) => data);
+    },
+    async getUserPost(parent: any, args: any) {
+      return await axios
+        .get(`${URI}${args.id}/posts`)
         .then((response) => response.data)
         .then((data) => data);
     },
