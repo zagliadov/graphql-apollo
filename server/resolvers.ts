@@ -1,5 +1,5 @@
 import axios from "axios";
-const URI = `https://jsonplaceholder.typicode.com/users`;
+const URI = `https://jsonplaceholder.typicode.com/users/`;
 
 interface IUser {
   id: number;
@@ -16,9 +16,9 @@ export const resolvers = {
         .then((response) => response.data)
         .then((data) => data);
     },
-    async getUser(par: any, args: any) {
+    async getUser(parent: any, args: any) {
       return await axios
-        .get(`https://jsonplaceholder.typicode.com/users/${args.id}`)
+        .get(`${URI}${args.id}`)
         .then((response) => response.data)
         .then((data) => data);
     },
@@ -29,5 +29,6 @@ export const resolvers = {
       await axios.post(URI, newUser);
       return newUser;
     },
+
   },
 };

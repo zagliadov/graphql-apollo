@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export const AllUserList: FC = () => {
   const { error, loading, data } = useUsers();
-  console.log(data?.getAllUsers);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
