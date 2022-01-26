@@ -1,21 +1,23 @@
 import { gql, useQuery } from "@apollo/client";
 
 const GET_USER_POST = gql`
-  query GetUserPost($getUserPostId: ID!) {
-    getUserPost(id: $getUserPostId) {
-      title
+  query GetUserPost($id: ID!) {
+    getUserPost(id: $id) {
+      id,
+      title,
+      body
     }
   }
 `;
 
 export const useUserPost = (id: any) => {
-  const { data: posts, error, loading } = useQuery(GET_USER_POST, {
+  const { data, error, loading } = useQuery(GET_USER_POST, {
     variables: {
       id,
     },
   });
   return {
-    posts,
+    data,
     error,
     loading,
   };
