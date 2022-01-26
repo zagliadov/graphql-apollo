@@ -1,4 +1,26 @@
 import { FC } from "react";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+const Header = styled.h4``;
+const Card = styled.div`
+  width: 250px;
+  height: 200px;
+  borderbottom: 1px solid silver;
+  margintop: 10px;
+  padding: 5px;
+`;
+const Title = styled.h5`
+
+`;
+const Body = styled.p`
+
+`;
 
 interface IPosts {
   __typename: string;
@@ -7,38 +29,23 @@ interface IPosts {
   body: string;
 }
 interface IProps {
-  posts: IPosts[]
+  posts: IPosts[];
 }
+
 export const PostList: FC<IProps> = ({ posts }) => {
   return (
     <>
-      <h4>User Posts:</h4>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
+      <Header>User Posts:</Header>
+      <Wrapper>
         {posts?.map((post: any) => {
           return (
-            <div
-              key={post.id}
-              style={{
-                width: "250px",
-                height: "200px",
-                borderBottom: "1px solid silver",
-                marginTop: "10px",
-                padding: "5px",
-              }}
-            >
-              <h5>{post.title}</h5>
-              <p>{post.body}</p>
-            </div>
+            <Card key={post.id}>
+              <Title>{post.title}</Title>
+              <Body>{post.body}</Body>
+            </Card>
           );
         })}
-      </div>
+      </Wrapper>
     </>
   );
 };
