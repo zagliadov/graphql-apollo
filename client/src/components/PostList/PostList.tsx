@@ -7,7 +7,9 @@ const Wrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
 `;
-const Header = styled.h4``;
+const Header = styled.h4`
+  font-size: 25px;
+`;
 const Card = styled.div`
   width: 250px;
   height: 200px;
@@ -15,12 +17,8 @@ const Card = styled.div`
   margintop: 10px;
   padding: 5px;
 `;
-const Title = styled.h5`
-
-`;
-const Body = styled.p`
-
-`;
+const Title = styled.h5``;
+const Body = styled.p``;
 
 interface IPosts {
   __typename: string;
