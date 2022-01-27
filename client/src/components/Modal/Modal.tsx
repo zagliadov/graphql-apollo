@@ -11,7 +11,7 @@ const Wrapper = styled.div<DisplayProps>`
   align-items: center;
   position: absolute;
   top: 0;
-  left: 0,;
+  left: 0;
   background: #758794ec;
   width: 100vw;
   height: 100vh;
