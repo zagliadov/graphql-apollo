@@ -1,6 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useUsers } from "../../hooks/useUsers";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LinksToUsers } from "../LinksToUsers/LinksToUsers";
 
@@ -28,6 +27,7 @@ const AddButton = styled.button`
 interface IProps {
   setOpen(arg0: boolean): void;
 }
+
 export const AllUserList: FC<IProps> = ({ setOpen }) => {
   const { error, loading, data } = useUsers();
 

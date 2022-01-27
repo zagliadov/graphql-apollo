@@ -32,9 +32,8 @@ export const resolvers = {
   },
   Mutation: {
     async createUser(parent: any, args: any) {
-      const newUser = args;
-      await axios.post(URI, newUser);
-      return newUser;
+      await axios.post(URI, args);
+      return args;
     },
   },
 };

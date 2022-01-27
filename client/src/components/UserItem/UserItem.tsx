@@ -9,9 +9,7 @@ const Wrapper = styled.div``;
 const Header = styled.h4`
   font-size: 24px;
 `;
-const Text = styled.p`
-
-`;
+const Text = styled.p``;
 
 export const UserItem: FC = () => {
   let { id } = useParams();
@@ -19,18 +17,15 @@ export const UserItem: FC = () => {
   const { data, loading, error } = useUser(id);
   const { data: posts } = useUserPost(id);
 
-
-  
-
-  if(error) navigate('/')
-  if(loading) return <Header>loading...</Header>
+  if (error) navigate("/");
+  if (loading) return <Header>loading...</Header>;
   return (
     <Wrapper>
       <Header>{data?.getUser.name}</Header>
       <hr />
-        <Text>Username: {data?.getUser.username}</Text>
-        <Text>Email: {data?.getUser.email}</Text>
-        <PostList posts={posts?.getUserPost} />
+      <Text>Username: {data?.getUser.username}</Text>
+      <Text>Email: {data?.getUser.email}</Text>
+      <PostList posts={posts?.getUserPost} />
     </Wrapper>
   );
 };
