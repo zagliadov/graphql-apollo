@@ -1,7 +1,6 @@
 import axios from "axios";
 const URI = `https://jsonplaceholder.typicode.com/users/`;
 
-
 interface IUser {
   id: number;
   name: string;
@@ -34,6 +33,10 @@ export const resolvers = {
     async createUser(parent: any, args: any) {
       await axios.post(URI, args);
       return args;
+    },
+    async deleteUser(parent: any, args: any) {
+      await axios.delete(`${URI}${args.id}`);
+      return args
     },
   },
 };
