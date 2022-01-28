@@ -59,8 +59,28 @@ const DELETE_USER = gql`
   }
 `;
 
+const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $name: String!
+    $username: String!
+    $email: String!
+    $updateUserId: ID!
+  ) {
+    updateUser(
+      name: $name
+      username: $username
+      email: $email
+      id: $updateUserId
+    ) {
+      name
+      username
+    }
+  }
+`;
+
 export const LinksToUsers: FC<IProps> = ({ users }) => {
   const [deleteUser] = useMutation(DELETE_USER);
+  const [updateUser] = useMutation(UPDATE_USER);
 
   return (
     <>
@@ -74,7 +94,11 @@ export const LinksToUsers: FC<IProps> = ({ users }) => {
               >
                 x
               </RemoveButton>
-              <UpdateButton onClick={() => console.log("asdf")}>+</UpdateButton>
+              <UpdateButton
+                onClick={() => updateUser({ variables: { id: user.id } })}
+              >
+                +
+              </UpdateButton>
             </ButtonWrapper>
           </Wrapper>
         );

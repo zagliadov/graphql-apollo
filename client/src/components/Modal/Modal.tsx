@@ -6,7 +6,7 @@ interface DisplayProps {
   type: string;
 }
 const Wrapper = styled.div<DisplayProps>`
-  display: ${({type}) => type};
+  display: ${({ type }) => type};
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -20,14 +20,9 @@ const Wrapper = styled.div<DisplayProps>`
 
 interface IProps {
   open: boolean;
-  setOpen: (arg0: boolean) => void;
 }
 
-export const Modal: FC<IProps> = ({ open, setOpen }) => {
+export const Modal: FC<IProps> = ({ open, children }) => {
   let type = open ? "flex" : "none";
-  return (
-    <Wrapper type={type}>
-      <AddForm setOpen={setOpen} />
-    </Wrapper>
-  );
+  return <Wrapper type={type}>{children}</Wrapper>;
 };
