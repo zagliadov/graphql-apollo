@@ -38,5 +38,10 @@ export const resolvers = {
       await axios.delete(`${URI}${args.id}`);
       return args
     },
+    async updateUser(parent: any, args: any) {
+      console.log(args)
+      await axios.put(`${URI}${args.id}`, args);
+      return args
+    },
   },
 };
