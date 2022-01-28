@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import styled from "styled-components";
@@ -50,6 +50,8 @@ interface IUser {
 }
 interface IProps {
   users: IUser[];
+  setUserId: any;
+  setOpen: (arg0: boolean) => void;
 }
 const DELETE_USER = gql`
   mutation DeleteUser($id: ID!) {
@@ -59,32 +61,12 @@ const DELETE_USER = gql`
   }
 `;
 
-const UPDATE_USER = gql`
-  mutation UpdateUser(
-    $name: String!
-    $username: String!
-    $email: String!
-    $updateUserId: ID!
-  ) {
-    updateUser(
-      name: $name
-      username: $username
-      email: $email
-      id: $updateUserId
-    ) {
-      name
-      username
-    }
-  }
-`;
-
-export const LinksToUsers: FC<IProps> = ({ users }) => {
+export const LinksToUsers: FC<IProps> = ({ users, setOpen, setUserId }) => {
   const [deleteUser] = useMutation(DELETE_USER);
-  const [updateUser] = useMutation(UPDATE_USER);
 
   return (
     <>
-      {users.map((user: any) => {
+      {users?.map((user: any) => {
         return (
           <Wrapper key={user.id}>
             <MyLink to={`/user/${user.id}`}>{user.name}</MyLink>
@@ -95,7 +77,10 @@ export const LinksToUsers: FC<IProps> = ({ users }) => {
                 x
               </RemoveButton>
               <UpdateButton
-                onClick={() => updateUser({ variables: { id: user.id } })}
+                onClick={() => {
+                  setOpen(true);
+                  setUserId(user.id);
+                }}
               >
                 +
               </UpdateButton>

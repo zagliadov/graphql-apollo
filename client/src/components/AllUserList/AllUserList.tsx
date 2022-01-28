@@ -26,9 +26,10 @@ const AddButton = styled.button`
 
 interface IProps {
   setOpen(arg0: boolean): void;
+  setUserId: any;
 }
 
-export const AllUserList: FC<IProps> = ({ setOpen }) => {
+export const AllUserList: FC<IProps> = ({ setOpen, setUserId }) => {
   const { error, loading, data } = useUsers();
 
   if (error) return <Title>Error...</Title>;
@@ -39,7 +40,7 @@ export const AllUserList: FC<IProps> = ({ setOpen }) => {
         <Title>All users from jsonplaceholder</Title>
         <AddButton onClick={() => setOpen(true)}>Add new user</AddButton>
       </Header>
-      <LinksToUsers users={data?.getAllUsers} />
+      <LinksToUsers users={data?.getAllUsers} setOpen={setOpen} setUserId={setUserId} />
     </Wrapper>
   );
 };

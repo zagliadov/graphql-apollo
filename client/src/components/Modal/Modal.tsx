@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { AddForm } from "../AddForm/AddForm";
 import styled from "styled-components";
 
 interface DisplayProps {
