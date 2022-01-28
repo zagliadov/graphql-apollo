@@ -3,13 +3,29 @@ import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid silver;
+  padding: 5px;
+`;
+
 const MyLink = styled(Link)`
   text-decoration: none;
   color: #2aa29f;
   font-size: 20px;
   padding-left: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px solid silver;
+`;
+
+const RemoveButton = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: silver;
 `;
 
 interface IUser {
@@ -37,14 +53,14 @@ export const LinksToUsers: FC<IProps> = ({ users }) => {
     <>
       {users.map((user: any) => {
         return (
-          <>
-            <MyLink key={user.id} to={`/user/${user.id}`}>
-              {user.name}
-            </MyLink>
-            <button onClick={() => deleteUser({ variables: { id: user.id } })}>
+          <Wrapper key={user.id}>
+            <MyLink to={`/user/${user.id}`}>{user.name}</MyLink>
+            <RemoveButton
+              onClick={() => deleteUser({ variables: { id: user.id } })}
+            >
               x
-            </button>
-          </>
+            </RemoveButton>
+          </Wrapper>
         );
       })}
     </>
