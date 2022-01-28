@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useUsers } from "../../hooks/useUsers";
 import styled from "styled-components";
 import { LinksToUsers } from "../LinksToUsers/LinksToUsers";

@@ -4,6 +4,7 @@ import { Modal } from "../Modal/Modal";
 
 export const Home: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
+
   return (
     <>
       <AllUserList setOpen={setOpen} />
