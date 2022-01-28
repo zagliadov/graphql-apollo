@@ -10,7 +10,9 @@ const Wrapper = styled.div`
   border-bottom: 1px solid silver;
   padding: 5px;
 `;
-
+const ButtonWrapper = styled.div`
+  display: flex;
+`;
 const MyLink = styled(Link)`
   text-decoration: none;
   color: #2aa29f;
@@ -19,11 +21,22 @@ const MyLink = styled(Link)`
   padding-bottom: 5px;
 `;
 
+const UpdateButton = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding-right: 15px;
+  color: silver;
+`;
+
 const RemoveButton = styled.button`
   background-color: transparent;
   border: none;
   outline: none;
   font-size: 20px;
+  padding-right: 15px;
   cursor: pointer;
   color: silver;
 `;
@@ -55,11 +68,14 @@ export const LinksToUsers: FC<IProps> = ({ users }) => {
         return (
           <Wrapper key={user.id}>
             <MyLink to={`/user/${user.id}`}>{user.name}</MyLink>
-            <RemoveButton
-              onClick={() => deleteUser({ variables: { id: user.id } })}
-            >
-              x
-            </RemoveButton>
+            <ButtonWrapper>
+              <RemoveButton
+                onClick={() => deleteUser({ variables: { id: user.id } })}
+              >
+                x
+              </RemoveButton>
+              <UpdateButton onClick={() => console.log("asdf")}>+</UpdateButton>
+            </ButtonWrapper>
           </Wrapper>
         );
       })}
